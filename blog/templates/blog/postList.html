@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <section class="site-section bg-light" id="section-news">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-12 text-center mb-5 site-animate">
+                    <h2 class="display-4">Our Blogs</h2>
+                    <div class="row justify-content-center">
+                        <div class="col-md-7">
+                            <p class="lead">Blogging is a communications mechanism handed to us by the long tail of the
+                                Internet.</p>
+                        </div>
+                    </div>
+                </div>
+
+                {% for post in allPost %}
+                    <div class="col-lg-4 col-md-6 col-sm-6">
+                        <div class="media d-block mb-4 text-center site-media site-animate">
+                            <img src="{{ post.image.url }}" alt="Free Template by colorlib.com" class="img-fluid" style="height: 280px;">
+                            <div class="media-body p-md-5 p-4">
+                                <h5 class="mt-0 h4"><a href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h5>
+
+                                <p class="post-meta"><span><span class="fa fa-calendar" style="margin-right: 10px;"></span>{{ post.date }}</span></p>
+
+                                <p class="mb-4">{{ post.content | truncatechars:120 }}</p>
+
+                                <p class="mb-0"><a href="{% url 'post-detail' post.id %}" class="btn btn-primary btn-sm" style="border-radius: 50px">Read More</a></p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock content %}

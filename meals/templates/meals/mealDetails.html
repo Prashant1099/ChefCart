@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+{% comment %}
+<style>
+    .mealDetails {
+        margin-bottom: 100px;
+        color: rgb(56, 51, 51);
+    }
+
+    .mealDetails img {
+        margin-top: 100px;
+        margin-bottom: 50px;
+    }
+    .mealDetails h2 {
+        font-family: "Playfair Display", serif;
+    }
+</style>
+{% endcomment %}
+
+<div class="container">
+    <div class="mealDetails" id="mealDetails">
+        <div class="row justify-content-center ">
+            <img src="{{ mealDetail.image.url }}" alt="Free Template by colorlib.com" class="img-fluid">
+        </div>
+        <h2>{{ mealDetail.mealName }}</h2>
+        <p>{{ mealDetail.description }}</p>
+        <p>Number of People: {{ mealDetail.noOfPeople }}</p>
+        <p>Price: {{ mealDetail.price }} ₹</p>
+        <p>Preparation Time: {{ mealDetail.prepTime }} mins</p>
+    </div>
+</div>
+
+
+{% endblock content %}

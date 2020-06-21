@@ -1,0 +1,351 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% block content %}
+
+
+<!-- Hero -->
+<section class="site-cover" style="background-image: url(static/images/bg_3.jpg);" id="section-home">
+    <div class="container">
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <div class="row align-items-center justify-content-center text-center site-vh-100">
+            <div class="col-md-12">
+                <h1 class="site-heading site-animate mb-3">Welcome To ChefCart</h1>
+                <h2 class="h5 site-subheading mb-5 site-animate">Come and eat well with our delicious &amp; healthy
+                    foods.</h2>
+
+                {% if user.is_authenticated %}
+
+                {% else %}
+                    <a href="#registerModal" class="btn btn-outline-white btn-lg site-animate" data-toggle="modal"
+                        data-target="#registerModal">Sign Up</a>
+                    <a href="#logInModal" class="btn btn-outline-white btn-lg site-animate" data-toggle="modal"
+                        data-target="#logInModal">Sign In</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END Hero -->
+
+
+
+<!-- Sign Up Form -->
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="reservationModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12 p-5">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <small>CLOSE </small><span aria-hidden="true">&times;</span>
+                        </button>
+                        <h1 class="mb-4">Register Yoursefl!</h1>
+                        <form method="POST">
+                            {% csrf_token %}
+                            {% bootstrap_form registerForm %}
+                            {% buttons %}
+                            <button class="btn btn-primary">Sign Up</button>
+                            {% endbuttons %}
+
+                            <div class="border-top pt-3">
+                                <p>Already have account?<a class="ml-2" data-dismiss="modal" href="#logInModal"
+                                        data-toggle="modal" data-target="#logInModal">Sign In</a></p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END Sign Up Form -->
+
+
+
+<!-- Sign In Form -->
+<div class="modal fade" id="logInModal" tabindex="-1" role="dialog" aria-labelledby="reservationModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12 p-5">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <small>CLOSE </small><span aria-hidden="true">&times;</span>
+                        </button>
+                        <h1 class="mb-4">Sign In</h1>
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-md-12 form-group">
+                                    <label>Username</label>
+                                    <input type="text" name="username" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 form-group">
+                                    <label>Password</label>
+                                    <input type="password" name="password" class="form-control">
+                                </div>
+                            </div>
+                            <button class="btn btn-primary">Sign In</button>
+                            <div class="border-top pt-3">
+                                <p>Don't have account?<a class="ml-2" data-dismiss="modal" href="#registerModal"
+                                        target="_blank" data-toggle="modal" data-target="#registerModal">Sign Up</a></p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END Sign In Form -->
+
+
+
+<!-- About Us -->
+<section class="site-section bg-light" id="section-about">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5 site-animate mb-5">
+                <h4 class="site-sub-title">Our Story</h4>
+                <h2 class="site-primary-title display-4">Welcome</h2>
+
+                <p class="mb-4">It’s all that and much more. The bottom line is that we’ve been in your shoes, whether
+                    you’re an owner, manager, chef or donuts maker. We’ve all worked in different facets of the
+                    restaurant industry, and additionally we have our own special areas of expertise.
+                </p>
+                <p><a href="{% url 'about' %}" class="btn btn-secondary btn-lg">Learn More About Us</a></p>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-6 site-animate img" data-animate-effect="fadeInRight">
+                <img src="{% static 'images/about_img_1.jpg' %}" alt="Free Template by colorlib.com" class="img-fluid">
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END About Us -->
+
+
+
+<!-- Our Special Offers -->
+<section class="site-section bg-light" id="section-offer">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-12 text-center mb-5 site-animate">
+                <h4 class="site-sub-title">Our Offers</h4>
+                <h2 class="display-4">Our Offer This Summer</h2>
+                <div class="row justify-content-center">
+                    <div class="col-md-7">
+                        <p class="lead">Far far away, behind the word mountains, far from the countries Vokalia and
+                            Consonantia, there live the blind texts.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="owl-carousel site-owl">
+
+                    {% for offer in offersList %}
+                    <div class="item">
+                        <div class="media d-block mb-4 text-center site-media site-animate border-0">
+                            <img src="{{ offer.image.url }}" alt="Free Template by colorlib.com" class="img-fluid">
+                            <div class="media-body p-md-5 p-4">
+                                <h5 class="text-primary">{{ offer.price }}₹</h5>
+                                <h5 class="mt-0 h4">{{ offer.mealName }}</h5>
+                                <p class="mb-4">{{ offer.description }}</p>
+
+                                <p class="mb-0"><a href="/#section-offer" class="btn btn-primary btn-sm">View
+                                        Details!</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- END Our Special Offers -->
+
+
+
+<!-- Menu -->
+<section class="site-section bg-light" id="section-menu">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center mb-5 site-animate">
+                <h2 class="display-4">Delicious Menu</h2>
+                <div class="row justify-content-center">
+                    <div class="col-md-7">
+                        <p class="lead">Far far away, behind the word mountains, far from the countries Vokalia and
+                            Consonantia, there live the blind texts.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 text-center">
+
+                <ul class="nav site-tab-nav nav-pills mb-5" id="pills-tab" role="tablist">
+                    {% for category in categories %}
+                    <li class="nav-item site-animate">
+                        <a class="nav-link" id="{{ category }}-tab" data-toggle="pill" href="#{{ category }}" role="tab"
+                            aria-controls="{{ category }}" aria-selected="true">{{ category }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+
+                <div class="tab-content text-left">
+                    {% for category in categories %}
+                    <div class="tab-pane fade show" id="{{ category }}" role="tabpanel"
+                        aria-labelledby="{{ category }}-tab">
+                        <div class="row justify-content-center">
+                            <div class="col-md-8 site-animate">
+                                {% for dish in menuItems %}
+                                {% if dish.category == category %}
+                                <div class="media menu-item" id="menu-item">
+                                    <img class="mr-3" src="{{ dish.image.url }}" class="img-fluid"
+                                        alt="Free Template by colorlib.com">
+                                    <div class="media-body">
+                                        <h5 class="mt-0"><a
+                                                href="{% url 'mealDetails' dish.slug %}">{{ dish.mealName }}</a></h5>
+                                        <p>{{ dish.description | truncatechars:150 }}</p>
+                                        <h6 class="text-primary menu-price">{{ dish.price }}₹</h6>
+                                    </div>
+                                </div>
+                                {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END Menu -->
+
+
+
+<!-- Blogs -->
+<section class="site-section bg-light" id="section-news">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-12 text-center mb-5 site-animate">
+                <h2 class="display-4">Our Blogs</h2>
+                <div class="row justify-content-center">
+                    <div class="col-md-7">
+                        <p class="lead">Blogging is a communications mechanism handed to us by the long tail of the
+                            Internet.</p>
+                    </div>
+                </div>
+            </div>
+
+            {% for post in allPost %}
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="media d-block mb-4 text-center site-media site-animate">
+                    <img src="{{ post.image.url }}" alt="Free Template by colorlib.com" class="img-fluid"
+                        style="height: 280px;">
+                    <div class="media-body p-md-5 p-4">
+                        <h5 class="mt-0 h4"><a href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h5>
+
+                        <p class="post-meta"><span><span class="fa fa-calendar"
+                                    style="margin-right: 10px;"></span>{{ post.date }}</span></p>
+
+                        <p class="mb-4">{{ post.content | truncatechars:120 }}</p>
+
+                        <p class="mb-0"><a href="{% url 'post-detail' post.id %}" class="btn btn-primary btn-sm"
+                                style="border-radius: 50px">Read More</a></p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!-- END Blogs -->
+
+
+
+<!-- Contact Us -->
+<section class="site-section bg-light" id="section-contact">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-12 text-center mb-5 site-animate">
+                <h2 class="display-4">Get In Touch</h2>
+                <div class="row justify-content-center">
+                    <div class="col-md-7">
+                        <p class="lead">Hey there! Do you wanna say something?</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="col-md-7 mb-5 site-animate">
+
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+                {% endif %}
+
+                <form method="POST">
+                    {% csrf_token %}
+                    {% bootstrap_form contactForm %}
+                    {% buttons %}
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    {% endbuttons %}
+                </form>
+            </div>
+            <!-- END Contact Form -->
+
+            <div class="col-md-1"></div>
+
+            <!-- Address -->
+            <div class="col-md-4 site-animate">
+                <p><img src="static/images/about_img_1.jpg" alt="" class="img-fluid"></p>
+                <p class="text-black">
+                    Address: <br> Kota, Raipur, Chhattisgarh <br> <br>
+                    Phone: <br> +91 86474-22788 <br> <br>
+                    Email: <br> restaurantsite@gmail.com
+                </p>
+            </div>
+            <!-- END Address -->
+
+        </div>
+    </div>
+</section>
+<!-- END Contact Us -->
+
+
+
+
+<!-- Map -->
+<div class="container-fluid" id="google-map">
+    <iframe src="https://maps.google.com/maps?q=21.261580%2C%2081.602186&t=k&z=17&ie=UTF8&iwloc=&output=embed"
+        frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen></iframe>
+</div>
+<!-- END Map -->
+
+
+
+{% endblock content %}

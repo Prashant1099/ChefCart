@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% block content %}
+
+    <div class="site-section row justify-content-center"> 
+        <div class="col-lg-8 p-5">                    
+            <div class="col-md-12 text-center mb-5 site-animate">
+                <h2 class="display-4">Reserve a Table</h2>
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <p class="lead">Reserve table now so that you can grab your seat in no time at Restaurant.</p>
+                    </div>
+                </div>
+            </div>
+
+            {% if messages %}
+				{% for message in messages %}
+					<div class="alert alert-{{ message.tags }}">
+						{{ message }}
+					</div>
+				{% endfor %}
+			{% endif %}
+
+            <form method="POST">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                {% buttons %}
+                    <button type="submit" class="btn btn-primary">Reserve Now</button>
+                {% endbuttons %}
+            </form>
+
+        </div>
+    </div>
+
+{% endblock content %}

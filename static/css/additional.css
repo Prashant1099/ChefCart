@@ -1,0 +1,94 @@
+/*======================== ABOUT US =========================*/
+
+#About-us {
+    margin-top: 100px;      
+}
+
+#About-us .content {
+    padding-top: 60px;
+}
+
+
+#why-choose-us .accordion .btn-block[aria-expanded="false"] {
+    font-family: "Playfair Display", serif;
+    color: #000000;
+    font-weight: 250;
+}
+
+#why-choose-us .accordion .btn-block {
+    position: relative;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+#why-choose-us .p-3 {
+    padding: 1rem!important;
+}
+
+#why-choose-us .btn-block {
+    display: block;
+    width: 100%;
+}
+
+
+/*=============== Meal Details ==================*/
+
+#mealDetails {
+    margin-bottom: 100px;
+    color: rgb(56, 51, 51);
+}
+
+#mealDetails img {
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+#mealDetails h2 {
+    font-family: "Playfair Display", serif;
+}
+
+
+/*================= Post Details ===================*/
+.postDetails img {
+    height: 500px;
+    max-width: 100%;
+    padding-top: 100px;
+    margin-bottom: 40px;
+}
+
+.postDetails {
+    padding-bottom: 100px;
+}
+
+
+
+
+/*================= Post Comments ===================*/
+.comment-heading {
+    font-size: 34px;
+    font-weight: 100px;
+}
+
+
+.comment-list li {    
+    list-style: none;    
+}
+
+.comment-list h3 {
+    font-weight: 250;
+}
+
+.comment-body {
+    border-bottom: 1px rgb(221, 209, 209) solid;
+    padding: 12px;
+}
+
+
+/*================= Google Map ===================*/
+#google-map {
+    margin-bottom: 100px;
+}
+
+
+#menu-item {
+    border-bottom: 1px rgb(221, 209, 209) solid;
+    padding: 15px;    
+}
