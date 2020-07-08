@@ -22,10 +22,9 @@ def reservation(request):
 
             subject = 'New Reservation Alert'
             message = 'A new reservation has been done recently'
-            reciepient = 'princepraa@gmail.com'
-            send_mail(subject, message, reciepient, [EMAIL_HOST_USER])
+            send_mail(subject, message, EMAIL_HOST_USER, [EMAIL_HOST_USER], fail_silently=False)
 
-            messages.success(request, f'Your table has been reserved successfully', fail_silently=False)
+            messages.success(request, f'Your table has been reserved successfully')
             return redirect('reservation')
 
     context = {
